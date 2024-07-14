@@ -556,7 +556,7 @@ class FreeplayState extends MusicBeatState
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);
 
-		var tex = Paths.getSparrowAtlas('menu/FNF_main_menu_assets');
+		//var tex = Paths.getSparrowAtlas('menu/FNF_main_menu_assets');
 
 		for (i in 0...MainMenuState.optionShit.length)
 		{

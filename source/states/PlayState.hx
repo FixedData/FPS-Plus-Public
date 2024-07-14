@@ -2563,7 +2563,6 @@ class PlayState extends MusicBeatState
 					boyfriend.playAnim(tagSplit[2], parseBool(tagSplit[3]), parseBool(tagSplit[4]), Std.parseInt(tagSplit[5]));
 			}
 		}
-
 		else if(tag.startsWith("setAnimSet;")){
 			var tagSplit = tag.split(";");
 
