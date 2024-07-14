@@ -102,16 +102,16 @@ class Tank extends BaseStage
 		bfStart.set(1015.5, 862);
 		gfStart.set(655.5, 713);
 
-		if (gf().curCharacter == 'pico-speaker'){
+		if (gf.curCharacter == 'pico-speaker'){
 			gfStart.set(909, 731);
 		}
 
-		if (boyfriend().curCharacter == 'pico-speaker'){
+		if (boyfriend.curCharacter == 'pico-speaker'){
 			bfStart.set(1090.5, 882);
 		}
 
 
-		if(gf().curCharacter == "pico-speaker" && PlayState.SONG.song.toLowerCase() == "stress"){
+		if(gf.curCharacter == "pico-speaker" && PlayState.SONG.song.toLowerCase() == "stress"){
 			TankmenBG.loadMappedAnims("picospeaker", "stress");
 
 			var tempTankman:TankmenBG = new TankmenBG(20, 500, true);
@@ -140,7 +140,10 @@ class Tank extends BaseStage
 
 	public override function beat(curBeat:Int){
 		for(x in foregroundElements){
-			x.dance();
+			if (Std.isOfType(x,BGSprite)) {
+				var obj:BGSprite = cast x;
+				obj.dance();
+			}
 		}
 		tankMoving = true;
 	}
@@ -152,6 +155,7 @@ class Tank extends BaseStage
 			var daAngleOffset:Float = 1;
 			tankAngle += FlxG.elapsed * tankSpeed;
 			tankGround.angle = tankAngle - 90 + 15;
+			
 
 			tankGround.x = tankX + Math.cos(FlxAngle.asRadians((tankAngle * daAngleOffset) + 180)) * 1500;
 			tankGround.y = 1300 + Math.sin(FlxAngle.asRadians((tankAngle * daAngleOffset) + 180)) * 1100;

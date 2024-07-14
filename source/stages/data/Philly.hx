@@ -128,7 +128,7 @@ class Philly extends BaseStage
 	function updateTrainPos():Void{
 		if (trainSound.time >= 4700){
 			startedMoving = true;
-			gf().playAnim('hairBlow');
+			gf.playAnim('hairBlow');
 		}
 
 		if (startedMoving){
@@ -150,7 +150,7 @@ class Philly extends BaseStage
 	}
 
 	function trainReset():Void{
-		gf().playAnim('hairFall');
+		gf.playAnim('hairFall');
 		phillyTrain.x = FlxG.width + 200;
 		trainMoving = false;
 		trainCars = 8;

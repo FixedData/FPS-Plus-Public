@@ -1,6 +1,8 @@
 package stages;
 
 //import flixel.FlxBasic;
+import elements.Character;
+import flixel.FlxBasic;
 import states.PlayState;
 import flixel.math.FlxPoint;
 
@@ -22,9 +24,9 @@ class BaseStage
     public var extraData:Map<String, Dynamic> = new Map<String, Dynamic>();
     public var events:Map<String, Void->Void> = new Map<String, Void->Void>();
 
-    public var backgroundElements:Array<Dynamic> = [];
-    public var middleElements:Array<Dynamic> = [];
-    public var foregroundElements:Array<Dynamic> = [];
+    public var backgroundElements:Array<FlxBasic> = [];
+    public var middleElements:Array<FlxBasic> = [];
+    public var foregroundElements:Array<FlxBasic> = [];
 
     public var useStartPoints:Bool = true; //Auto positions characters if set to true
     public var dadStart:FlxPoint = new FlxPoint(314.5, 867);
@@ -48,7 +50,7 @@ class BaseStage
 	 *
 	 * @param   x  The object to add. Should be any type that can be added to a state.
 	 */
-    public function addToBackground(x:Dynamic){
+    public function addToBackground(x:FlxBasic){
         backgroundElements.push(x);
     }
 
@@ -57,7 +59,7 @@ class BaseStage
 	 *
 	 * @param   x  The object to add. Should be any type that can be added to a state.
 	 */
-    public function addToMiddle(x:Dynamic){
+    public function addToMiddle(x:FlxBasic){
         middleElements.push(x);
     }
 
@@ -66,7 +68,7 @@ class BaseStage
 	 *
 	 * @param   x  The object to add. Should be any type that can be added to a state.
 	 */
-    public function addToForeground(x:Dynamic){
+    public function addToForeground(x:FlxBasic){
         foregroundElements.push(x);
     }
 
@@ -120,9 +122,16 @@ class BaseStage
 	 */
     public function step(curStep:Int){}
 
-    inline function boyfriend()     { return PlayState.instance.boyfriend; }
-    inline function gf()            { return PlayState.instance.gf; }
-    inline function dad()           { return PlayState.instance.dad; }
-    inline function playstate()     { return PlayState.instance; }
+    var boyfriend(get,never):Character;
+    @:noCompletion inline function get_boyfriend() return PlayState.instance.boyfriend;
+
+    var gf(get,never):Character;
+    @:noCompletion inline function get_gf() return PlayState.instance.gf;
+
+    var dad(get,never):Character;
+    @:noCompletion inline function get_dad() return PlayState.instance.dad;
+    
+    var playState(get,never):PlayState;
+    @:noCompletion inline function get_playState() return PlayState.instance;
 
 }
