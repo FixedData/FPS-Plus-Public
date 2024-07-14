@@ -1,5 +1,6 @@
 package;
 
+import objects.VideoSprite;
 import freeplay.FreeplayState;
 import Highscore.SongStats;
 #if sys
@@ -209,7 +210,7 @@ class PlayState extends MusicBeatState
 	// how big to stretch the pixel art assets
 	public static var daPixelZoom:Float = 6;
 
-	var video:VideoHandler;
+	var video:VideoSprite;
 	var inCutscene:Bool = false;
 	var inVideoCutscene:Bool = false;
 
@@ -868,19 +869,21 @@ class PlayState extends MusicBeatState
 		inCutscene = true;
 		inVideoCutscene = true;
 	
-		var blackShit:FlxSprite = new FlxSprite(-200, -200).makeGraphic(FlxG.width * 3, FlxG.height * 3, FlxColor.BLACK);
-		blackShit.screenCenter(XY);
+		var blackShit:FlxSprite = new FlxSprite(-200, -200).makeGraphic(1,1, FlxColor.BLACK);
+		blackShit.scale.set(FlxG.width * 3, FlxG.height * 3);
+		blackShit.updateHitbox();
+		blackShit.screenCenter();
 		blackShit.scrollFactor.set();
 		add(blackShit);
 
-		video = new VideoHandler();
+		video = new VideoSprite();
 		video.scrollFactor.set();
 		video.antialiasing = true;
 
 		camGame.zoom = 1;
 
-		video.playMP4(path, function(){
-			
+		video.load(path);
+		video.addCallback(ONEND,()->{
 			tweenManager.tween(blackShit, {alpha: 0}, 0.4, {ease: FlxEase.quadInOut, onComplete: function(t){
 				remove(blackShit);
 			}});
@@ -892,8 +895,8 @@ class PlayState extends MusicBeatState
 			if(endFunc != null){ endFunc(); }
 
 			startCountdown();
-
-		}, false);
+		},true);
+		video.play();
 
 		add(video);
 		

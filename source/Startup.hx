@@ -88,7 +88,8 @@ class Startup extends FlxState
         SaveManager.global();
 
         FlxG.mouse.visible = false;
-        FlxG.sound.muteKeys = null;
+
+        //FlxG.sound.muteKeys = null;
 
         //FlxG.save.bind("data", "Rozebud/FunkinFPSPlus");
 		Highscore.load();

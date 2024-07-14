@@ -1,5 +1,6 @@
 package title;
 
+import objects.VideoSprite;
 import flixel.FlxG;
 import flixel.FlxState;
 import flixel.util.FlxColor;
@@ -8,8 +9,8 @@ using StringTools;
 
 class TitleVideo extends FlxState
 {
-	var oldFPS:Int = VideoHandler.MAX_FPS;
-	var video:VideoHandler;
+	// var oldFPS:Int = VideoHandler.MAX_FPS;
+	var video:VideoSprite;
 	var titleState = new TitleScreen();
 
 	override public function create():Void
@@ -21,16 +22,22 @@ class TitleVideo extends FlxState
 
 		if(!Main.novid){
 
-			VideoHandler.MAX_FPS = 60;
-
-			video = new VideoHandler();
-
-			video.playMP4(Paths.video('klaskiiTitle'), function(){
+			video = new VideoSprite();
+			video.addCallback(ONEND,()->{
 				next();
-				#if web
-					VideoHandler.MAX_FPS = oldFPS;
-				#end
-			}, false);
+			},true);
+			video.load(Paths.video('klaskiiTitle'));
+			video.play();
+			//VideoHandler.MAX_FPS = 60;
+
+			//video = new VideoHandler();
+
+			// video.playMP4(Paths.video('klaskiiTitle'), function(){
+			// 	next();
+			// 	#if web
+			// 		VideoHandler.MAX_FPS = oldFPS;
+			// 	#end
+			// }, false);
 
 			add(video);
 			

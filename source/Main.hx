@@ -34,7 +34,7 @@ class Main extends Sprite
 
 		//On web builds, video tends to lag quite a bit, so this just helps it run a bit faster.
 		#if web
-		VideoHandler.MAX_FPS = 30;
+		//VideoHandler.MAX_FPS = 30;
 		#end
 
 		trace("-=Args=-");
