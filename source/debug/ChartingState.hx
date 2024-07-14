@@ -1,5 +1,8 @@
 package debug;
 
+import states.PlayState;
+import elements.Note;
+import elements.HealthIcon;
 import transition.data.InstantTransition;
 import flixel.addons.ui.FlxUIText;
 import flixel.util.FlxTimer;
@@ -14,7 +17,7 @@ import openfl.display.BitmapData;
 import flixel.graphics.FlxGraphic;
 import Song.SongEvents;
 import openfl.media.SoundChannel;
-import Conductor.BPMChangeEvent;
+import systems.Conductor.BPMChangeEvent;
 import Section.SwagSection;
 import Song.SwagSong;
 import flixel.FlxG;

@@ -1,5 +1,6 @@
 package;
 
+import systems.cache.ImageCache;
 #if sys
 import sys.FileSystem;
 #end

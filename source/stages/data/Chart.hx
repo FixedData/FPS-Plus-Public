@@ -1,5 +1,6 @@
 package stages.data;
 
+import states.PlayState;
 import flixel.tweens.FlxTween;
 import flixel.FlxSprite;
 import flixel.math.FlxPoint;

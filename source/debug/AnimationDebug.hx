@@ -1,5 +1,6 @@
 package debug;
 
+import elements.Character;
 import characters.CharacterInfoBase;
 import config.Config;
 import openfl.desktop.ClipboardFormats;
@@ -203,7 +204,7 @@ class AnimationDebug extends FlxState
 		
 		if (FlxG.keys.justPressed.ESCAPE)
 		{
-			FlxG.switchState(new PlayState());
+			FlxG.switchState(new states.PlayState());
 		}
 
 		var upP = FlxG.keys.anyJustPressed([UP]);

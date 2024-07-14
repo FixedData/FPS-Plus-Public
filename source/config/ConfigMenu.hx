@@ -1,7 +1,8 @@
 package config;
 
+import states.MainMenuState;
+import states.title.TitleScreen;
 import openfl.utils.Assets;
-import title.TitleScreen;
 import flixel.sound.FlxSound;
 import flixel.group.FlxSpriteGroup;
 import flixel.group.FlxGroup.FlxTypedGroup;

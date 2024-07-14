@@ -1,5 +1,7 @@
 package;
 
+import systems.cache.ImageCache;
+import states.StoryMenuState;
 import sys.FileSystem;
 import flixel.tweens.FlxTween;
 import flixel.ui.FlxBar;
@@ -25,7 +27,7 @@ using StringTools;
 class Startup extends FlxState
 {
 
-    var nextState:FlxState = new TitleVideo();
+    var nextState:FlxState = new states.title.TitleVideo();
 
     var splash:FlxSprite;
     var loadingBar:FlxBar;
