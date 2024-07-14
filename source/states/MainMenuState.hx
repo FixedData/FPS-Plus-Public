@@ -41,7 +41,7 @@ class MainMenuState extends MusicBeatState
 
 	public static var fromFreeplay:Bool = false;
 
-	public static final lerpSpeed:Float = 0.01;
+	public static final lerpSpeed:Float = 0.06;
 	final warningDelay:Float = 10;
 
 	override function create()
