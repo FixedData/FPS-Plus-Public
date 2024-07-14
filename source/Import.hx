@@ -1,5 +1,7 @@
 #if !macro
 
+import flixel.FlxG;
+
 import elements.Alphabet;
 
 import systems.Conductor;

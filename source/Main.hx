@@ -1,5 +1,6 @@
 package;
 
+import extensions.openfl.DebugDisplay;
 import flixel.system.scaleModes.RatioScaleMode;
 import flixel.FlxG;
 import flixel.FlxGame;
@@ -10,7 +11,7 @@ import debug.*;
 class Main extends Sprite
 {
 
-	public static var fpsDisplay:FPS;
+	public static var fpsDisplay:DebugDisplay;
 
 	public static var novid:Bool = false;
 	public static var flippymode:Bool = false;
@@ -26,7 +27,7 @@ class Main extends Sprite
 
 		SaveManager.global();
 
-		fpsDisplay = new FPS(10, 3, 0xFFFFFF);
+		fpsDisplay = new DebugDisplay(10, 3, 0xFFFFFF);
 		fpsDisplay.visible = true;
 
 		addChild(new FlxGame(0, 0, Startup, 60, 60, true));
