@@ -10,13 +10,12 @@ class HealthIcon extends FlxSprite
 	public var sprTracker:FlxSprite;
 	public var id:Int;
 
-	public var defualtIconScale:Float = 1;
-	public var iconScale:Float = 1;
+	public var defaultScale:Float = 1;
 	public var iconSize:Float;
 	public var isPlayer:Bool = false;
 	public var character:String = "face";
 
-	private var tween:FlxTween;
+	public var canLerpToDefaultScale:Bool = false;
 
 	private static final pixelIcons:Array<String> = ["bf-pixel", "senpai", "senpai-angry", "spirit", "bf-lil", "guy-lil"];
 
@@ -40,26 +39,21 @@ class HealthIcon extends FlxSprite
 		id = _id;
 		
 		scrollFactor.set();
-
-		tween = FlxTween.tween(this, {}, 0);
 	}
 
 	override function update(elapsed:Float){
 
 		super.update(elapsed);
-		setGraphicSize(Std.int(iconSize * iconScale));
+		if (canLerpToDefaultScale) {
+			final sc = Utils.fpsAdjsutedLerp(this.scale.x,defaultScale,0.2);
+			scale.x = scale.y = sc;
+		}
 		updateHitbox();
+		
 
 		if (sprTracker != null){
 			setPosition(sprTracker.x + sprTracker.width + 10, sprTracker.y - 30);
 		}
-	}
-
-	public function tweenToDefaultScale(_time:Float, _ease:Null<flixel.tweens.EaseFunction>){
-
-		tween.cancel();
-		tween = FlxTween.tween(this, {iconScale: this.defualtIconScale}, _time, {ease: _ease});
-
 	}
 
 	public function setIconCharacter(character:String){

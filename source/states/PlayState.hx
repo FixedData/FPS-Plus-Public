@@ -625,10 +625,12 @@ class PlayState extends MusicBeatState
 		scoreTxt.scrollFactor.set();
 
 		iconP1 = new HealthIcon(boyfriend.iconName, true);
+		iconP1.canLerpToDefaultScale = true;
 		iconP1.y = healthBar.y - (iconP1.height / 2);
 		
 
 		iconP2 = new HealthIcon(dad.iconName, false);
+		iconP2.canLerpToDefaultScale = true;
 		iconP2.y = healthBar.y - (iconP2.height / 2);
 
 		ccText = new SongCaptions(Config.downscroll);
@@ -2524,11 +2526,8 @@ class PlayState extends MusicBeatState
 		}
 
 		if (curBeat % iconBopFrequency == 0){
-			iconP1.iconScale = iconP1.defualtIconScale * 1.25;
-			iconP2.iconScale = iconP2.defualtIconScale * 1.25;
-
-			iconP1.tweenToDefaultScale(0.2, FlxEase.quintOut);
-			iconP2.tweenToDefaultScale(0.2, FlxEase.quintOut);
+			iconP1.scale.x = iconP2.scale.y = iconP1.defaultScale * 1.2;
+			iconP2.scale.x = iconP2.scale.y = iconP2.defaultScale * 1.2;
 		}
 		
 		if (curBeat % gfBopFrequency == 0){
