@@ -1,6 +1,7 @@
 package states;
 
 
+import elements.hud.BaseHUD;
 import elements.hud.IGameHUD;
 import substates.PauseSubState;
 import states.title.TitleScreen;
@@ -233,7 +234,7 @@ class PlayState extends MusicBeatState
 	private var meta:SongMetaTags;
 
 
-	var gameHUD:IGameHUD;
+	var gameHUD:BaseHUD;
 	
 	override public function create(){
 
@@ -607,10 +608,9 @@ class PlayState extends MusicBeatState
 			add(meta);
 		}
 
-		var hud = new elements.hud.data.BaseHUD(this);
-		add(hud);
-		hud.cameras = [camHUD];
-		gameHUD = hud;
+		gameHUD = new elements.hud.data.FNFHUD(this);
+		add(gameHUD);
+		gameHUD.cameras = [camHUD];
 
 		ccText = new SongCaptions(Config.downscroll);
 		ccText.scrollFactor.set();
@@ -1061,7 +1061,7 @@ class PlayState extends MusicBeatState
 			// generateSong('fresh');
 		}, 5);
 
-		callUIFunc((f)->f.onStartCountdown());
+		gameHUD.onStartCountdown();
 	}
 
 	var previousFrameTime:Int = 0;
@@ -2411,7 +2411,7 @@ class PlayState extends MusicBeatState
 		}
 
 		stage.step(curStep);
-		gameHUD.stepHit(curStep);
+		gameHUD.stepHit();
 
 		super.stepHit();
 	}
@@ -2469,7 +2469,7 @@ class PlayState extends MusicBeatState
 			boyfriend.dance();
 		}
 
-		gameHUD.beatHit(curBeat);
+		gameHUD.beatHit();
 		stage.beat(curBeat);
 		
 	}
@@ -2877,12 +2877,8 @@ class PlayState extends MusicBeatState
 	}
 
 	function updateScoreText(){
-
-		callUIFunc((f)->f.onScoreUpdate(songStats));
-
+		gameHUD.onScoreUpdate(songStats);
 	}
-
-	inline function callUIFunc(f:IGameHUD->Void) f(gameHUD);
 
 	function comboBreak():Void{
 		if (combo > minCombo){

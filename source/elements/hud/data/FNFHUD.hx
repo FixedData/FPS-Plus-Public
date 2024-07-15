@@ -14,19 +14,11 @@ import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
 
 //make a container later
 @:access(states.PlayState)
-class BaseHUD extends FlxTypedSpriteGroup<FlxSprite> implements IGameHUD {
-	public var parent:PlayState;
-	public var iconP1:HealthIcon;
-	public var iconP2:HealthIcon;
-    public var healthBar:FlxBar;
-	public var scoreTxt:FlxTextExt;
-
-	
+class FNFHUD extends BaseHUD{
 	var healthBarBG:FlxSprite;
 
-    public function new(parent:PlayState) {
-        super();
-        this.parent = parent;
+	override function init() {
+
 
 		healthBarBG = new FlxSprite(0, Config.downscroll ? FlxG.height * 0.1 : FlxG.height * 0.875).loadGraphic(Paths.image("ui/healthBar"));
 		healthBarBG.screenCenter(X);
@@ -62,10 +54,10 @@ class BaseHUD extends FlxTypedSpriteGroup<FlxSprite> implements IGameHUD {
 		iconP1.visible = false;
 		iconP2.visible = false;
 		scoreTxt.visible = false;
+	}
 
-    }
 
-	public function onStartCountdown() {
+	override function onStartCountdown() {
 		healthBarBG.visible = true;
 		healthBar.visible = true;
 		iconP1.visible = true;
@@ -95,16 +87,14 @@ class BaseHUD extends FlxTypedSpriteGroup<FlxSprite> implements IGameHUD {
 		}
     }
 
-    public function stepHit(step:Int) {}
-
-    public function beatHit(beat:Int) {
-        if (beat % parent.iconBopFrequency == 0){
+    override function beatHit() {
+        if (curBeat % parent.iconBopFrequency == 0){
 			iconP1.scale.x = iconP2.scale.y = iconP1.defaultScale * 1.2;
 			iconP2.scale.x = iconP2.scale.y = iconP2.defaultScale * 1.2;
 		}
     }
 
-	public function onScoreUpdate(stats:ScoreStats) 
+	override function onScoreUpdate(stats:ScoreStats) 
 	{
 		scoreTxt.text = "Score:" + stats.score;
 
@@ -118,7 +108,5 @@ class BaseHUD extends FlxTypedSpriteGroup<FlxSprite> implements IGameHUD {
 			scoreTxt.text += " | Accuracy:" + PlayState.truncateFloat(stats.accuracy, 2) + "%";
 		}
 	}
-
-	public function getVar(v:String) return Reflect.getProperty(this,v);
 	
 }
