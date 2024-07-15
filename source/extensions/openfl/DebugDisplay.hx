@@ -88,13 +88,14 @@ class DebugDisplay extends Sprite
 
 	}
 
-	function getExtraData() 
+	inline function getExtraData() 
 	{
+		var str:String = '';
 		if (Std.isOfType(FlxG.state,PlayState)) {
 			var pState:PlayState = cast FlxG.state;
-			if (pState.autoplay) return '\nAutoPlay On';
+			if (pState.autoplay) str += '\nAutoPlay On';
 		}
-		return '';
+		return str;
 	}
 	
 
