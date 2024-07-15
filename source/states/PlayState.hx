@@ -1,6 +1,7 @@
 package states;
 
 
+import elements.hud.IGameHUD;
 import substates.PauseSubState;
 import states.title.TitleScreen;
 import elements.Character;
@@ -175,14 +176,9 @@ class PlayState extends MusicBeatState
 	private var combo:Int = 0;
 	private var totalPlayed:Int = 0;
 
-	private var healthBarBG:FlxSprite;
-	private var healthBar:FlxBar;
-
 	private var generatedMusic:Bool = false;
 	private var startingSong:Bool = false;
 
-	private var iconP1:HealthIcon;
-	private var iconP2:HealthIcon;
 	private var camHUD:FlxCamera;
 	private var camGame:FlxCamera;
 	private var camOverlay:FlxCamera;
@@ -198,7 +194,6 @@ class PlayState extends MusicBeatState
 	var stage:BaseStage;
 
 	var talking:Bool = true;
-	var scoreTxt:FlxTextExt;
 
 	var ccText:SongCaptions;
 
@@ -236,6 +231,9 @@ class PlayState extends MusicBeatState
 	var endingSong:Bool = false;
 
 	private var meta:SongMetaTags;
+
+
+	var gameHUD:IGameHUD;
 	
 	override public function create(){
 
@@ -609,38 +607,14 @@ class PlayState extends MusicBeatState
 			add(meta);
 		}
 
-		healthBarBG = new FlxSprite(0, Config.downscroll ? FlxG.height * 0.1 : FlxG.height * 0.875).loadGraphic(Paths.image("ui/healthBar"));
-		healthBarBG.screenCenter(X);
-		healthBarBG.scrollFactor.set();
-		healthBarBG.antialiasing = true;
-		add(healthBarBG);
-
-		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this, 'healthLerp', 0, 2);
-		healthBar.scrollFactor.set();
-		healthBar.createFilledBar(dad.characterColor, boyfriend.characterColor);
-		healthBar.antialiasing = true;
-		// healthBar
-		
-		scoreTxt = new FlxTextExt(healthBarBG.x - 105, (FlxG.height * 0.9) + 36, 800, "", 22);
-		scoreTxt.setFormat(Paths.font("vcr"), 22, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		scoreTxt.scrollFactor.set();
-
-		iconP1 = new HealthIcon(boyfriend.iconName, true);
-		iconP1.canLerpToDefaultScale = true;
-		iconP1.y = healthBar.y - (iconP1.height / 2);
-		
-
-		iconP2 = new HealthIcon(dad.iconName, false);
-		iconP2.canLerpToDefaultScale = true;
-		iconP2.y = healthBar.y - (iconP2.height / 2);
+		var hud = new elements.hud.data.BaseHUD(this);
+		add(hud);
+		hud.cameras = [camHUD];
+		gameHUD = hud;
 
 		ccText = new SongCaptions(Config.downscroll);
 		ccText.scrollFactor.set();
 		
-		add(healthBar);
-		add(iconP2);
-		add(iconP1);
-		add(scoreTxt);
 		if(Config.showCaptions){ add(ccText); } 
 
 		playerStrums.cameras = [camHUD];
@@ -648,23 +622,9 @@ class PlayState extends MusicBeatState
 		playerCovers.cameras = [camHUD];
 		enemyCovers.cameras = [camHUD];
 		notes.cameras = [camHUD];
-		healthBar.cameras = [camHUD];
-		healthBarBG.cameras = [camHUD];
-		iconP1.cameras = [camHUD];
-		iconP2.cameras = [camHUD];
-		scoreTxt.cameras = [camHUD];
 		doof.cameras = [camHUD];
 		ccText.cameras = [camHUD];
 
-		healthBar.visible = false;
-		healthBarBG.visible = false;
-		iconP1.visible = false;
-		iconP2.visible = false;
-		scoreTxt.visible = false;
-
-		// if (SONG.song == 'South')
-		// FlxG.camera.alpha = 0.7;
-		// UI_camera.zoom = 1;
 
 		// cameras = [FlxG.cameras.list[1]];
 		startingSong = true;
@@ -921,17 +881,17 @@ class PlayState extends MusicBeatState
 	{
 		inCutscene = false;
 
-		healthBar.visible = true;
-		healthBarBG.visible = true;
-		iconP1.visible = true;
-		iconP2.visible = true;
-		scoreTxt.visible = true;
+		// healthBar.visible = true;
+		// healthBarBG.visible = true;
+		// iconP1.visible = true;
+		// iconP2.visible = true;
+		// scoreTxt.visible = true;
 
-		healthBar.alpha = 0;
-		healthBarBG.alpha = 0;
-		iconP1.alpha = 0;
-		iconP2.alpha = 0;
-		scoreTxt.alpha = 0;
+		// healthBar.alpha = 0;
+		// healthBarBG.alpha = 0;
+		// iconP1.alpha = 0;
+		// iconP2.alpha = 0;
+		// scoreTxt.alpha = 0;
 
 		generateStaticArrows(0, true);
 		generateStaticArrows(1, true);
@@ -955,11 +915,11 @@ class PlayState extends MusicBeatState
 		
 		camChangeZoom(2.8, Conductor.crochet / 1000 * 16, FlxEase.quadInOut, function(t){
 			autoZoom = true;
-			tweenManager.tween(healthBar, {alpha: 1}, hudElementsFadeInTime);
-			tweenManager.tween(healthBarBG, {alpha: 1}, hudElementsFadeInTime);
-			tweenManager.tween(iconP1, {alpha: 1}, hudElementsFadeInTime);
-			tweenManager.tween(iconP2, {alpha: 1}, hudElementsFadeInTime);
-			tweenManager.tween(scoreTxt, {alpha: 1}, hudElementsFadeInTime);
+			// tweenManager.tween(healthBar, {alpha: 1}, hudElementsFadeInTime);
+			// tweenManager.tween(healthBarBG, {alpha: 1}, hudElementsFadeInTime);
+			// tweenManager.tween(iconP1, {alpha: 1}, hudElementsFadeInTime);
+			// tweenManager.tween(iconP2, {alpha: 1}, hudElementsFadeInTime);
+			// tweenManager.tween(scoreTxt, {alpha: 1}, hudElementsFadeInTime);
 			for(x in playerStrums.members){
 				tweenManager.tween(x, {alpha: 1}, hudElementsFadeInTime);
 			}
@@ -977,12 +937,6 @@ class PlayState extends MusicBeatState
 	function startCountdown():Void {
 
 		inCutscene = false;
-
-		healthBar.visible = true;
-		healthBarBG.visible = true;
-		iconP1.visible = true;
-		iconP2.visible = true;
-		scoreTxt.visible = true;
 
 		generateStaticArrows(0);
 		generateStaticArrows(1);
@@ -1106,6 +1060,8 @@ class PlayState extends MusicBeatState
 			swagCounter += 1;
 			// generateSong('fresh');
 		}, 5);
+
+		callUIFunc((f)->f.onStartCountdown());
 	}
 
 	var previousFrameTime:Int = 0;
@@ -1133,14 +1089,6 @@ class PlayState extends MusicBeatState
 			if(vocalType == splitVocalTrack){ vocalsOther.time = sectionStartTime; }
 			curSection = sectionStartPoint;
 		}
-
-		/*
-		new FlxTimer().start(0.5, function(tmr:FlxTimer)
-		{
-			if(!paused)
-			resyncVocals();
-		});
-		*/
 
 	}
 
@@ -1450,12 +1398,12 @@ class PlayState extends MusicBeatState
 	var startedCountdown:Bool = false;
 	var canPause:Bool = true;
 
-	function truncateFloat( number : Float, precision : Int): Float {
+	public static inline function truncateFloat( number : Float, precision : Int): Float {
 		var num = number;
 		num = num * Math.pow(10, precision);
 		num = Math.round( num ) / Math.pow(10, precision);
 		return num;
-		}
+	}
 
 
 	override public function update(elapsed:Float) {
@@ -1542,11 +1490,6 @@ class PlayState extends MusicBeatState
 			sectionStart = false;
 		}
 
-		var iconOffset:Int = 26;
-
-		iconP1.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01) - iconOffset);
-		iconP2.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) - (iconP2.width - iconOffset);
-
 		if (health > 2){
 			health = 2;
 		}
@@ -1556,20 +1499,6 @@ class PlayState extends MusicBeatState
 		}
 		if(inRange(healthLerp, 2, 0.001)){
 			healthLerp = 2;
-		}
-
-		//Health Icons
-		if (healthBar.percent < 20){
-			iconP1.animation.curAnim.curFrame = 1;
-			iconP2.animation.curAnim.curFrame = 2;
-		}
-		else if (healthBar.percent > 80){
-			iconP1.animation.curAnim.curFrame = 2;
-			iconP2.animation.curAnim.curFrame = 1;
-		}
-		else{
-			iconP1.animation.curAnim.curFrame = 0;
-			iconP2.animation.curAnim.curFrame = 0;
 		}
 
 		if (FlxG.keys.justPressed.EIGHT && !isStoryMode){
@@ -2482,6 +2411,7 @@ class PlayState extends MusicBeatState
 		}
 
 		stage.step(curStep);
+		gameHUD.stepHit(curStep);
 
 		super.stepHit();
 	}
@@ -2526,10 +2456,10 @@ class PlayState extends MusicBeatState
 			uiBop(0.0175, 0.03, 0.8);
 		}
 
-		if (curBeat % iconBopFrequency == 0){
-			iconP1.scale.x = iconP2.scale.y = iconP1.defaultScale * 1.2;
-			iconP2.scale.x = iconP2.scale.y = iconP2.defaultScale * 1.2;
-		}
+		// if (curBeat % iconBopFrequency == 0){
+		// 	iconP1.scale.x = iconP2.scale.y = iconP1.defaultScale * 1.2;
+		// 	iconP2.scale.x = iconP2.scale.y = iconP2.defaultScale * 1.2;
+		// }
 		
 		if (curBeat % gfBopFrequency == 0){
 			gf.dance();
@@ -2539,6 +2469,7 @@ class PlayState extends MusicBeatState
 			boyfriend.dance();
 		}
 
+		gameHUD.beatHit(curBeat);
 		stage.beat(curBeat);
 		
 	}
@@ -2947,20 +2878,11 @@ class PlayState extends MusicBeatState
 
 	function updateScoreText(){
 
-		scoreTxt.text = "Score:" + songStats.score;
-
-		if(Config.showMisses == 1){
-			scoreTxt.text += " | Misses:" + songStats.missCount;
-		}
-		else if(Config.showMisses == 2){
-			scoreTxt.text += " | Combo Breaks:" + songStats.comboBreakCount;
-		}
-
-		if(Config.showAccuracy){
-			scoreTxt.text += " | Accuracy:" + truncateFloat(songStats.accuracy, 2) + "%";
-		}
+		callUIFunc((f)->f.onScoreUpdate(songStats));
 
 	}
+
+	inline function callUIFunc(f:IGameHUD->Void) f(gameHUD);
 
 	function comboBreak():Void{
 		if (combo > minCombo){
