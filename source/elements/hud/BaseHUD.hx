@@ -1,11 +1,11 @@
 package elements.hud;
 
-import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
+import flixel.group.FlxSpriteContainer.FlxTypedSpriteContainer;
 import extensions.flixel.FlxTextExt;
 import flixel.ui.FlxBar;
 
 @:access(states.PlayState)
-class BaseHUD extends FlxTypedSpriteGroup<FlxSprite> {
+class BaseHUD extends FlxTypedSpriteContainer<FlxSprite> {
     public var parent:PlayState;
 
     public var iconP1:Null<HealthIcon>;

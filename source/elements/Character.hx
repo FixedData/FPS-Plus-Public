@@ -286,8 +286,12 @@ class Character extends FlxSpriteGroup
 	{
 
 		if(animSet != ""){
-			if(animation.exists(AnimName + "-" + animSet)){
-				AnimName = AnimName + "-" + animSet;
+			final setName = AnimName + "-" + animSet;
+			if(characterInfo.info.frameLoadType != atlas) {
+				if(character.animation.exists(setName)) AnimName = setName;			
+			}
+			else{ //Code for atlas characters
+				if(atlasCharacter.animInfoMap.exists(AnimName)) AnimName = setName;
 			}
 			//else { trace(AnimName + "-" + animSet + " not found. Reverting to " + AnimName); }
 		}

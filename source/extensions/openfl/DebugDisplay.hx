@@ -79,10 +79,10 @@ class DebugDisplay extends Sprite
 		if (currentCount != cacheCount)
 		{
 			fps.text = "FPS: " + currentFPS + ' | ' + flixel.util.FlxStringUtil.formatBytes(memory) + getExtraData();
-		}
 
-		underlay.width = fps.width + 4;
-		underlay.height = fps.height;
+			underlay.width = fps.width + 4;
+			underlay.height = fps.height;
+		}
 
 		cacheCount = currentCount;
 
