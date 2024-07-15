@@ -20,7 +20,7 @@ class BaseHUD extends FlxTypedSpriteGroup<FlxSprite> {
     }
 
     public var curStep(get,never):Int;
-    function get_curStep():Int return PlayState.instance.curStep;
+    @:noCompletion function get_curStep():Int return PlayState.instance.curStep;
 
     public var curBeat(get,never):Int;
     @:noCompletion function get_curBeat():Int return PlayState.instance.curBeat;
