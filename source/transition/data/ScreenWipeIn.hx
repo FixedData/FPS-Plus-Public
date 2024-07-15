@@ -20,7 +20,9 @@ class ScreenWipeIn extends BaseTransition{
 
         time = _time;
 
-        blockThing = FlxGradient.createGradientFlxSprite(FlxG.width, FlxG.height*2, [0x00000000, FlxColor.BLACK, FlxColor.BLACK]);
+        blockThing = FlxGradient.createGradientFlxSprite(1, FlxG.height*2, [0x00000000, FlxColor.BLACK, FlxColor.BLACK]);
+        blockThing.scale.x = FlxG.width;
+        blockThing.updateHitbox();
         blockThing.y -= blockThing.height/2;
         add(blockThing);
 

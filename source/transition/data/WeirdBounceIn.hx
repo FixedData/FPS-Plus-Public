@@ -20,7 +20,7 @@ class WeirdBounceIn extends BaseTransition{
 
         time = _time;
 
-        blockThing = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+        blockThing = new FlxSprite().makeScaledGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
         //blockThing.x -= blockThing.width;
         add(blockThing);
 

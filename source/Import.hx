@@ -12,5 +12,6 @@ import systems.MusicBeatSubstate;
 import states.PlayState;
 
 
+using systems.FlxSpriteUtils;
 using StringTools;
 #end

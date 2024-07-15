@@ -20,7 +20,7 @@ class FadeOut extends BaseTransition{
 
         time = _time;
 
-        blockThing = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, _color);
+        blockThing = new FlxSprite().makeScaledGraphic(FlxG.width, FlxG.height, _color);
         blockThing.alpha = 0;
         add(blockThing);
 
