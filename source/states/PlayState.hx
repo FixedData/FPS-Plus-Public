@@ -2,7 +2,6 @@ package states;
 
 
 import elements.hud.BaseHUD;
-import elements.hud.IGameHUD;
 import substates.PauseSubState;
 import states.title.TitleScreen;
 import elements.Character;
