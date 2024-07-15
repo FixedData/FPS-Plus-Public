@@ -92,7 +92,7 @@ class DebugDisplay extends Sprite
 	{
 		if (Std.isOfType(FlxG.state,PlayState)) {
 			var pState:PlayState = cast FlxG.state;
-			if (pState.autoplay) return '\nAutoPlayed';
+			if (pState.autoplay) return '\nAutoPlay On';
 		}
 		return '';
 	}

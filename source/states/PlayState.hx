@@ -242,7 +242,7 @@ class PlayState extends MusicBeatState
 		add(tweenManager);
 		trace(songStats);
 
-		customTransIn = new ScreenWipeIn(1.2);
+		customTransIn = new ScreenWipeIn(0.6);
 		customTransOut = new ScreenWipeOut(0.6);
 
 		if(loadEvents){
